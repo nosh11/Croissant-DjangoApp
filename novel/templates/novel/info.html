@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novel Info</title>
+</head>
+
+<body>
+    <h1>{{ novel.title }}</h1>
+    <p>Author: {{ novel.author }}</p>
+    <p>Description: {{ novel.description }}</p>
+    <p>Body: {{ novel.letter_body }}</p>
+    <p>Created at: {{ novel.created_at }}</p>
+    <p>Updated at: {{ novel.updated_at }}</p>
+    <a href="/novel/edit/{{ novel.id }}">Edit</a>
+    <a href="/novel/delete/{{ novel.id }}">Delete</a>
+    <a href="/novel">Back to list</a>
+</body>
+</html>
