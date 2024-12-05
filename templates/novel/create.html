@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Novel の作成</title>
-</head>
+{% extends 'novel/base.html' %}
+{% block title %}Novel を作成する{% endblock %}
 
-<body>
-    <h1>Novel を作成する</h1>
+{% block content %}
     <p>Novel を作成するために、以下のフォームに情報を入力してください。</p>
     <form action="{% if pk %}/novel/edit/{{ pk }}/{% else %}/novel/create/{% endif %}" method="post">
-        <!-- CSRF token -->
         {% csrf_token %}
         {{ form }}
         <button type="submit">{% if pk %}Edit{% else %}Create{% endif %}</button>
     </form>
     <a href="/novel">Back to list</a>
-</body>
-</html>
+{% endblock %}

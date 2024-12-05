@@ -1,0 +1,30 @@
+{% extends 'novel/base.html' %}
+{% block title %}Croissant Novel{% endblock %}
+
+{% block content %}
+<p>Croissant World の小説サイトです。</p>
+
+<!-- Novel をリストで表示 -->
+<h2>Novels</h2>
+<table>
+    <tbody>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+        </tr>
+        {% for novel in novels %}
+        <tr>
+            <td>
+                <a href="/novel/info/{{ novel.id }}">{{ novel.title }}</a>
+            </td>
+            <td>{{ novel.author }}</td>
+            <td>{{ novel.created_at }}</td>
+            <td>{{ novel.updated_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/novel/create">Create a new novel</a>
+{% endblock %}

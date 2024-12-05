@@ -46,6 +46,8 @@ create = NovelCreateView.as_view()
 
 class NovelInfoView(View):
     def get(self, request, pk):
+        if (Novel.objects.filter(pk=pk).exists() == False):
+            return render(request, '404.html')
         novel = Novel.objects.get(pk=pk)
         return render(request, 'novel/info.html', {'novel': novel})
 
@@ -54,6 +56,9 @@ info = NovelInfoView.as_view()
 
 class NovelDeleteView(View):
     def get(self, request, pk):
+        if (Novel.objects.filter(pk=pk).exists() == False):
+            return render(request, '404.html')
+
         novel = Novel.objects.get(pk=pk)
         novel.delete()
         return redirect('index')
