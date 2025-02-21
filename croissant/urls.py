@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from croissant import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('novel/', include('novel.urls')),
+    path('',  views.root) # This is the root URL
 ]

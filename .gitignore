@@ -1,3 +1,4 @@
 /db.sqlite3
 /start.bat
 __pycache__/
+/.venv

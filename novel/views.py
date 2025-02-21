@@ -33,7 +33,12 @@ class NovelCreateView(View):
             print(pk)
             # edit処理
             if (pk):
-                Novel.objects.filter(pk=pk).update(**form.cleaned_data)
+                novel = Novel.objects.get(pk=pk)
+                novel.title = form.cleaned_data['title']
+                novel.author = form.cleaned_data['author']
+                novel.description = form.cleaned_data['description']
+                novel.letter_body = form.cleaned_data['letter_body']
+                novel.save()
                 return redirect('index')
 
             # create処理
