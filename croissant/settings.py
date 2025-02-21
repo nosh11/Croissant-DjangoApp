@@ -28,10 +28,12 @@ DEBUG = 'False'
 
 ALLOWED_HOSTS = ['.azurewebsites.net', 'localhost']
 
+STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     'novel.apps.NovelConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,8 +125,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = '/static/'
 
+# 読み込んだファイルをまとめて出力する先
+STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('ENV_STATIC_ROOT'))
+# ブラウザ上でアクセスするためのURLパス
+STATIC_URL = os.getenv('ENV_STATIC_URL')
+
+FRONTEND_DIR = os.path.join(BASE_DIR, 'frontenddir')  # フロントエンドのディレクトリ
+
 STATICFILES_DIRS = (
     [
         os.path.join(BASE_DIR, "static"), 
+        os.path.join(FRONTEND_DIR, 'build', 'static')
     ]
 )
