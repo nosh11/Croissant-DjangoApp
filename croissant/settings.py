@@ -126,15 +126,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 
 # 読み込んだファイルをまとめて出力する先
-STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('ENV_STATIC_ROOT'))
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # ブラウザ上でアクセスするためのURLパス
-STATIC_URL = os.getenv('ENV_STATIC_URL')
+STATIC_URL = "static/"
 
 FRONTEND_DIR = os.path.join(BASE_DIR, 'frontenddir')  # フロントエンドのディレクトリ
 
 STATICFILES_DIRS = (
     [
-        os.path.join(BASE_DIR, "static"), 
-        os.path.join(FRONTEND_DIR, 'build', 'static')
+        os.path.join(FRONTEND_DIR, 'build\static'),
     ]
 )
