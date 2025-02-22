@@ -27,7 +27,6 @@ SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v
 DEBUG = 'False'
 
 ALLOWED_HOSTS = ['.azurewebsites.net', 'localhost', "169.254.129.5"]
-CSRF_TRUSTED_ORIGINS = ['localhost', 'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net/']
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
