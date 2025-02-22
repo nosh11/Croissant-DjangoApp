@@ -2,3 +2,4 @@
 /start.bat
 __pycache__/
 /.venv
+/staticfiles/
