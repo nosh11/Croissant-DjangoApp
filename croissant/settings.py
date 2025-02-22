@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
 
-ALLOWED_HOSTS = ['.azurewebsites.net', 'localhost']
+ALLOWED_HOSTS = ['.azurewebsites.net', 'localhost', "169.254.129.5"]
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
@@ -133,3 +133,12 @@ STATICFILES_DIRS = (
         BASE_DIR / 'static'
     ]
 )
+
+
+
+# セッションの設定
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # セッションの有効期限を1週間に設定
+SESSION_COOKIE_HTTPONLY = True  # クッキーをJavaScriptからアクセスできないように設定
+SESSION_COOKIE_SAMESITE = 'Strict'  # クロスサイトリクエストフォージェリ (CSRF) 保護のためにStrictに設定
+SESSION_COOKIE_SECURE = True  # 開発環境ではFalse、本番環境ではTrueに設定
+CSRF_COOKIE_SECURE = True    # 開発環境ではFalse、本番環境ではTrueに設定
