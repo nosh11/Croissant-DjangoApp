@@ -6,7 +6,12 @@
     <form action="{% if pk %}/novel/edit/{{ pk }}/{% else %}/novel/create/{% endif %}" method="post">
         {% csrf_token %}
         {{ form }}
-        <button type="submit">{% if pk %}Edit{% else %}Create{% endif %}</button>
+        <input type="submit" value="Submit">
+
+        {% if pk %}
+            <a href="/novel/delete/{{ pk }}">Delete</a>
+        {% endif %}
+        
     </form>
     <a href="/novel">Back to list</a>
 {% endblock %}
