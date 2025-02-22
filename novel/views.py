@@ -28,6 +28,13 @@ class NovelCreateView(View):
         return render(request, 'novel/create.html', context)
 
     def post(self, request, pk = None):
+        # csrf tokenのチェック
+        csrf = request.POST.get('csrfmiddlewaretoken')
+        if not csrf:
+            return render(request, '404.html')
+        
+
+
         form = NovelForm(request.POST)
         if form.is_valid():
             print(pk)
@@ -45,7 +52,10 @@ class NovelCreateView(View):
             else:
                 form.save()
                 return redirect('index')
-        return render(request, 'novel/create.html', {'form': form})
+            
+        
+        #return render(request, 'novel/create.html', {'form': form})
+        return render(request, 'novel/create.html', {'form': form, 'pk': pk, 'error': '入力内容が正しくありません'})
 
 create = NovelCreateView.as_view()
 
