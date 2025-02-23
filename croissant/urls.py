@@ -17,6 +17,7 @@ Including another URLconf
 from django import urls
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
 
 from croissant import settings, views
 
@@ -25,4 +26,4 @@ urlpatterns = [
     path('novel/', include('novel.urls')),
     path('portfolio/', include('portfolio.urls')),
     path('',  views.root),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

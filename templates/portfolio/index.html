@@ -11,7 +11,7 @@
             <a href="/portfolio/detail/{{ portfolio.id }}" class="portfolio-item">
                 <p>{{ portfolio.title }}</p>
                 {% if portfolio.image %}
-                    <img src="{% static 'images/logo.jpg' %}" class="portfolio-image">
+                    <img src="{{ MEDIA_URL }}{{ portfolio.image }}" class="portfolio-image">
                 {% endif %}
             </a>
         {% endfor %}
