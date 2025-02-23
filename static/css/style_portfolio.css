@@ -19,7 +19,7 @@
 
 /* ヘッダー */
 .page-header {
-    font-family: "Tsukimi Rounded", serif;
+    font-family: "Zen Maru Gothic", serif;
     font-weight: 400;
     grid-area: header;
     background-color: rgba(219, 219, 219, 0.9);
@@ -46,6 +46,7 @@
     padding: 5px 5px;
     margin: 0 10px;
     position: relative;
+    transition: transform 0.1s ease-in-out; /* 追加 */
 }
 
 .page-header .item::after {
@@ -58,22 +59,17 @@
     bottom: 0;
     opacity: 0;
     visibility: hidden;
-    transition: 0.3s;
+    transition: 0.3s; 
 }
 
 .page-header .item:hover {
-    transform: scale(1.06);
-    transition: 0.3s ease-in-out;
+    transform: scale(1.06); /* 拡大 */
 }
 
 .page-header .item:hover::after {
     visibility: visible;
     bottom: 5px;
     opacity: 0.5;
-}
-
-.page-header .item:active {
-    transform: scale(0.9) translateY(5px);
 }
 
 /* メインコンテンツ */
@@ -94,6 +90,13 @@
     font-size: 20px;
     line-height: 1.5;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-footer {
+    font-family: "Zen Maru Gothic", serif;
+    grid-area: footer;
+    background-color: rgba(219, 219, 219, 0.9);
+    padding: 10px;
 }
 
 /* フォーム */
@@ -135,11 +138,13 @@ a {
     color: #242424;
     text-decoration: none;
     position: relative;
+    transition: transform 0.1s ease-in-out; /* 追加 */
 }
 
 a:hover {
     color: #242424;
     text-decoration: none;
+    transform: scale(1.06); /* 拡大 */
 }
 
 /* ポートフォリオ */
@@ -176,7 +181,7 @@ a:hover {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 /* テーブル */
@@ -195,3 +200,37 @@ th, td {
 th {
     background-color: #f2f2f2;
 }
+
+
+
+/** マーキーさせたい部分 */
+.marquee {
+    overflow: hidden; /* スクロールバーが出ないように */
+    position: relative; /* マーキーの内容部分の位置の基準になるように */
+  }
+   /* マーキーの内容部分の高さ確保 */
+  .marquee::after {
+    content: "";
+    white-space: nowrap;
+    display: inline-block;
+  }
+  /* マーキーさせたい部分(内側) */
+  .marquee > .marquee-inner {
+    position: absolute;
+    top: 0;
+    white-space: nowrap; 
+    animation-name: marquee;
+    animation-timing-function: linear; 
+    animation-duration: 1000s;
+    animation-iteration-count: infinite;
+  }
+  /* マウスオーバーでマーキーストップ */
+  .marquee > .marquee-inner:hover {
+    animation-play-state: paused;
+    cursor: default;
+  }
+  /** マーキーアニメーション */
+  @keyframes marquee {
+      0% { left: 100%; transform: translate(0); }
+    100% { left: 0; transform: translate(-100%); }
+  }
