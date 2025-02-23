@@ -22,5 +22,6 @@ from croissant import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('novel/', include('novel.urls')),
+    path('portfolio/', include('portfolio.urls')),
     path('',  views.root) # This is the root URL
 ]
