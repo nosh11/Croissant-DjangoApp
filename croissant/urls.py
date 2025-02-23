@@ -14,14 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django import urls
 from django.contrib import admin
 from django.urls import path, include
 
-from croissant import views
+from croissant import settings, views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('novel/', include('novel.urls')),
     path('portfolio/', include('portfolio.urls')),
-    path('',  views.root) # This is the root URL
+    path('',  views.root),
 ]

@@ -37,6 +37,7 @@ STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage'
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     'novel.apps.NovelConfig',
+    'portfolio.apps.PortfolioConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -144,3 +145,8 @@ SESSION_COOKIE_HTTPONLY = True  # クッキーをJavaScriptからアクセスで
 SESSION_COOKIE_SAMESITE = 'Strict'  # クロスサイトリクエストフォージェリ (CSRF) 保護のためにStrictに設定
 SESSION_COOKIE_SECURE = True  # 開発環境ではFalse、本番環境ではTrueに設定
 CSRF_COOKIE_SECURE = True    # 開発環境ではFalse、本番環境ではTrueに設定
+
+
+# メディアの設定
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

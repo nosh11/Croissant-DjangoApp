@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Page : {% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_portfolio.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Tsukimi+Rounded&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid">
+        <header class="page-header">
+            <div class="content">
+                <nav class="menu-bar">
+                    <div class="group">
+                        <p class="title">Portfolio</p>
+                    </div>
+                    <div class="group">
+                        <a class="item" href="https://github.com/nosh11">Github</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main class="page-main">
+            {% block content %}{% endblock %}
+        </main>
+        <footer class="page-footer">
+            <div class="content">
+                <p>croissantmc 2025</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

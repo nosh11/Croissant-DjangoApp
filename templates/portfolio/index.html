@@ -1,90 +1,21 @@
-<!DOCTYPE html>
-<html lang="jp">
-<head>
-    <meta charset="UTF-8">
-    <title>Portfolio Page</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style_portfolio.css' %}">
+{% extends 'portfolio/base.html' %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Tsukimi+Rounded&display=swap" rel="stylesheet">
-</head>
+{% block title %}一覧{% endblock %}
 
-<body>
-    <div class="grid">
-        <header class="page-header">
-            <div class="content">
-                <nav class="menu-bar">
-                    <div class="group">
-                        <p class="title">Portfolio</a>
-                    </div>
-                    <div class="group">
-                        <a class="item" href="https://github.com/nosh11">Github</a>
-                        <a class="item">Link 2</a>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <main class="page-main">
-            <div class="content">
-                <h1>過去の成果物</h1>
-                <div class="portfolio">
-                    <div class="portfolio-item">
-                        <h2>Portfolio 1</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 2</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-                    <div class="portfolio-item">
-                        <h2>Portfolio 3</h2>
-                        <p>説明文</p>
-                    </div>
-            </div>
-        </main>
-        <footer class="page-footer">
-            <div class="content">
-                <p>croissantmc 2025</p>
-            </div>
-        </footer>
+
+{% load static %}
+{% block content %}
+    <p>ポートフォリオ一覧</p>
+    <div class="portfolio">
+        {% for portfolio in portfolios %}
+            <a href="/portfolio/detail/{{ portfolio.id }}" class="portfolio-item">
+                <p>{{ portfolio.title }}</p>
+                {% if portfolio.image %}
+                    <img src="{% static 'images/logo.jpg' %}" class="portfolio-image">
+                {% endif %}
+            </a>
+        {% endfor %}
     </div>
-</body>
-</html>
+    <a href="/portfolio/create" class="url">作成</a>
+    <a href="/" class="url">Back to Home</a>
+{% endblock %}
