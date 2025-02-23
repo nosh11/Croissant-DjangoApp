@@ -79,23 +79,23 @@ jobs:
             [
               {
                 "name": "DJANGO_ENV",
-                "value": "production"  
-              }
+                "value": "production"
+              },
               {
                 "name": "PGHOST",
-                "value": ${{ secrets.PGHOST }}
+                "value": "${{ secrets.PGHOST }}"
               },
               {
                 "name": "PGUSER",
-                "value": ${{ secrets.PGUSER }}
+                "value": "${{ secrets.PGUSER }}"
               },
               {
                 "name": "PGPORT",
-                "value": ${{ secrets.PGPORT }}
+                "value": "${{ secrets.PGPORT }}"
               },
               {
                 "name": "PGDATABASE",
-                "value": ${{ secrets.PGDATABASE }}
+                "value": "${{ secrets.PGDATABASE }}"
               },
               {
                 "name": "PGPASSWORD",
