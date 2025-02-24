@@ -4,15 +4,18 @@
 {% block content %}
     <h1>{{ portfolio.title }}</h1>
 
-    {% if portfolio.image %}
+    {% if url_tag and "www.youtube.com" in portfolio.url %}
+        <div>{{ url_tag | safe }}</div>
+
+    {% elif portfolio.image %}
         <img src="{{ portfolio.image.url }}" alt="portfolio image" class="portfolio-image">
+        {% if url_tag %}
+            <div>{{ url_tag | safe }}</div>
+        {% endif %}
     {% endif %}
+    <br>
     <p>Description: {{ portfolio.description }}</p>
 
-
-    {% if portfolio.url %}
-        <a href="{{ portfolio.url }}">Jump to page</a>
-    {% endif %}
     <a href="/portfolio/edit/{{ portfolio.id }}">Edit</a>
     <a href="/portfolio/delete/{{ portfolio.id }}">Delete</a>
     <a href="/portfolio">Back to list</a>

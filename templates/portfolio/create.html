@@ -12,12 +12,15 @@
         {{ form.title }}
 
         <label for="image">Image:</label>
-        <p>{{ form.image.errors }}</p>
+        {{ form.image.errors }}
         {{ form.image }}
+        <img id="thumbnail-preview" class="thumbnail-image" style="display: none;">
+
 
         <label for="url">URL:</label>
         {{ form.url.errors }}
         {{ form.url }}
+        <button type="button" id="fetch-thumbnail">YoutubeサムネイルをImageに設定する</button>
 
         <label for="description">Description:</label>
         {{ form.description.errors }}

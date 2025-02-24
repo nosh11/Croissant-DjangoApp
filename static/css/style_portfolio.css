@@ -136,7 +136,7 @@ input[type="text"], input[type="email"], input[type="password"], textarea {
 /* リンク */
 a {
     color: #242424;
-    text-decoration: none;
+    /* text-decoration: none; */
     position: relative;
     transition: transform 0.1s ease-in-out; /* 追加 */
 }
@@ -161,6 +161,7 @@ a:hover {
 
 .portfolio-item {
     background-color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
     color: #333;
     border-radius: 5px;
     padding: 10px;
@@ -184,6 +185,12 @@ a:hover {
     border-radius: 10px;
 }
 
+h1 {
+    font-size: 40px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
 /* テーブル */
 table {
     border-collapse: collapse;
@@ -201,6 +208,11 @@ th {
     background-color: #f2f2f2;
 }
 
+
+iframe {
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
 
 /** マーキーさせたい部分 */
@@ -234,3 +246,20 @@ th {
       0% { left: 100%; transform: translate(0); }
     100% { left: 0; transform: translate(-100%); }
   }
+
+
+.youtube-icon {
+    width: 50px;
+    height: 50px;
+    transform: translateY(-20px);
+    margin: -20px 0;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease-in-out outline 0.1s ease-in-out;
+}
+
+.youtube-icon:hover {
+    transform: translateY(-20px) scale(1.1);
+    outline-offset: 2px;
+    outline: 2px solid orangered;
+}
