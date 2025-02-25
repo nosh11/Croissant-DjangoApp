@@ -16,7 +16,7 @@
                         src="https://img.youtube.com/vi/{{ portfolio.url|slice:'-11:' }}/hqdefault.jpg" 
                         class="portfolio-image"
                     >
-                    <img 
+                    <img onclick="location.href='/portfolio/detail/{{ portfolio.id }}';"
                         src="{% static 'images/youtube-icon.png' %}" 
                         class="youtube-icon"
                         alt="YouTube Icon"
@@ -28,6 +28,7 @@
         {% endfor %}
     </div>
     <a href="/portfolio/create" class="url">作成</a>
+    <a href="/portfolio/tag/" class="url">タグの設定</a>
     <a href="/" class="url">Back to Home</a>
 
     <script type="text/javascript" charset="utf-8">

@@ -4,15 +4,17 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from portfolio.forms import PortfolioForm
-from portfolio.models import PortFolio
+from portfolio.models import PortFolio, Tag
 
 import requests
 from bs4 import BeautifulSoup
 
 # Index
 class PortfolioListView(View):
-    def get(self, request):
+    def get(self, request, tags = None):
         portfolios = PortFolio.objects.all()
+        if tags:
+            portfolios = portfolios.filter(tags__name__in=tags)
         return render(request, 'portfolio/index.html', {'portfolios': portfolios})
 index = PortfolioListView.as_view()
 
@@ -24,8 +26,10 @@ class PortfolioCreateView(View):
             form = PortfolioForm(instance=portfolio)
         else:
             form = PortfolioForm()
+        
+        tags = Tag.objects.all()
 
-        return render(request, 'portfolio/create.html', {'form': form, 'pk': pk})
+        return render(request, 'portfolio/create.html', {'form': form, 'pk': pk, 'tags': tags})
 
     def post(self, request, pk=None):
         form = PortfolioForm(request.POST, request.FILES)

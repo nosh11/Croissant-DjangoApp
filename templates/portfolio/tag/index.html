@@ -1,0 +1,18 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}一覧{% endblock %}
+
+
+{% load static %}
+{% block content %}
+    <p>タグの一覧</p>
+    <div class="portfolio">
+        {% for tag in tags %}
+            <div onclick="location.href='/portfolio/tag/edit/{{ tag.id }}';" class="portfolio-tag">
+                <p>{{ tag.name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="/portfolio/tag/create" class="url">作成</a>
+    <a href="/portfolio/" class="url">戻る</a>
+{% endblock %}

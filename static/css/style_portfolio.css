@@ -263,3 +263,20 @@ iframe {
     outline-offset: 2px;
     outline: 2px solid orangered;
 }
+
+.portfolio-tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+
+    transition: transform 0.1s ease-in-out;
+    transform: scale(1);
+}
+
+.portfolio-tag:hover {
+    transform: scale(1.1);
+}

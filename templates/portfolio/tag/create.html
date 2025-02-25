@@ -1,0 +1,26 @@
+{% extends 'portfolio/base.html' %}
+
+{% block title %}作成{% endblock %}
+
+
+{% load static %}
+{% block content %}
+    <p>タグを作成する</p>
+    <form action="/portfolio/tag/create/" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <label for="name">Name:</label>
+        {{ form.name.errors }}
+        {{ form.name }}
+
+        <input type="submit" value="Submit">
+    </form>
+    {% if pk %}
+        <a href="/portfolio/tag/delete/{{ pk }}" class="url">削除</a>
+    {% endif %}
+    
+
+
+    <a href="/portfolio/tag/" class="url">戻る</a>
+{% endblock %}

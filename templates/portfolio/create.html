@@ -26,6 +26,16 @@
         {{ form.description.errors }}
         {{ form.description }}
 
+        <label for="tags">Tags:</label>
+        {{ form.tags.errors }}
+        {{ form.tags }}
+        {% for tag in tags %}
+            <input type="checkbox" name="tags" value="{{ tag.id }}" {% if tag.id in selected_tags %}checked{% endif %}>
+            <label>{{ tag.name }}</label>
+        {% endfor %}
+
+
+
         <input type="submit" value="Submit">
     </form>
     <a href="/portfolio">Back to list</a>
