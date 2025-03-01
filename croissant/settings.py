@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'croissant.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-if os.getenv("DJANGO_ENV") == "production" and False:
+if os.getenv("DJANGO_ENV") == "production":
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.mysql',
