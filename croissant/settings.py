@@ -100,7 +100,8 @@ if os.getenv("DJANGO_ENV") == "production":
                 'charset': 'utf8mb4',
                 'ssl': {
                     'ca': os.getenv('SSL_PATH'),
-                    }
+                    },
+                'ssl-mode': 'REQUIRED',
             }
         }
     }
