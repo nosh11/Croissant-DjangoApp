@@ -106,7 +106,7 @@ jobs:
             ]
 
       - name: Upload SSL Certificate
-        run: echo "${{ secrets.SSL_CERTIFICATE }}" | sudo tee ${{ secrets.SSL_PATH }} > /dev/null
+        run: echo "${{ secrets.SSL_CERTIFICATE }}" | sudo tee ${{ vars.SSH_PATH }} > /dev/null
 
       - name: 'Deploy to Azure Web App using ZipDeploy'
         uses: azure/webapps-deploy@v3

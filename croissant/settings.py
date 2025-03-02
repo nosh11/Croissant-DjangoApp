@@ -26,10 +26,9 @@ SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
 
-ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost']
-
-if os.getenv("DJANGO_ENV") == "production":
-    ALLOWED_HOSTS.append(os.getenv("PGHOST"))
+ALLOWED_HOSTS = [
+    'croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 
+    'localhost']
 
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net']
@@ -88,6 +87,7 @@ WSGI_APPLICATION = 'croissant.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 if os.getenv("DJANGO_ENV") == "production":
+    ALLOWED_HOSTS.append(os.getenv("PGHOST"))
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.mysql',
@@ -98,10 +98,7 @@ if os.getenv("DJANGO_ENV") == "production":
             'PORT': os.getenv('PGPORT'),
             'OPTIONS': {
                 'charset': 'utf8mb4',
-                'ssl': {
-                    'ca': os.getenv('SSL_PATH'),
-                    },
-                'ssl-mode': 'REQUIRED',
+                'ssl': {'ca': "/var/www/html/DigiCertGlobalRootCA.crt.pem"},
             }
         }
     }
