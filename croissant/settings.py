@@ -96,6 +96,9 @@ if os.getenv("DJANGO_ENV") == "production":
             'PASSWORD': os.getenv('PGPASSWORD'),
             'HOST': os.getenv('PGHOST'),
             'PORT': os.getenv('PGPORT'),
+            'OPTIONS': {
+                'charset': 'utf8mb4'
+            }
         }
     }
 else:
