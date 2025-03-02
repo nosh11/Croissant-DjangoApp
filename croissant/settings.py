@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
 
-ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost', "169.254.131.*", "169.254.129.*"]
+ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost']
+
+if os.getenv("DJANGO_ENV") == "production":
+    ALLOWED_HOSTS.append(os.getenv("PGHOST"))
+
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net']
 
