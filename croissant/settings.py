@@ -98,7 +98,7 @@ if os.getenv("DJANGO_ENV") == "production":
             'PORT': os.getenv('PGPORT'),
             'OPTIONS': {
                 'charset': 'utf8mb4',
-                'ssl': {'ca': "/home/site/wwwroot/ssl.crt.pem"},
+                'ssl': {'ca': "/home/site/wwwroot/cert.pem"},
             }
         }
     }

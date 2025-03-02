@@ -105,8 +105,12 @@ jobs:
               }
             ]
       
+      - name: Create directory for SSL Certificate
+        run: mkdir -p /home/site/wwwroot
+
       - name: Upload SSL Certificate
-        run: echo -n "${{ secrets.SSL_CERTIFICATE }}" > ssl.crt.pem
+        run: |
+          echo "${{ secrets.SSL_CERTIFICATE }}" > /home/site/wwwroot/cert.pem
 
       - name: 'Deploy to Azure Web App using ZipDeploy'
         uses: azure/webapps-deploy@v3
