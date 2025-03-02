@@ -97,7 +97,10 @@ if os.getenv("DJANGO_ENV") == "production":
             'HOST': os.getenv('PGHOST'),
             'PORT': os.getenv('PGPORT'),
             'OPTIONS': {
-                'charset': 'utf8mb4'
+                'charset': 'utf8mb4',
+                'ssl': {
+                    'ca': os.getenv('SSL_PATH'),
+                    }
             }
         }
     }

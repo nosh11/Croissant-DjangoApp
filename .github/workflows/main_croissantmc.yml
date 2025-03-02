@@ -105,6 +105,9 @@ jobs:
               }
             ]
 
+      - name: Upload SSL Certificate
+        run: echo "${{ secrets.SSL_CERTIFICATE }}" > ${{ secrets.SSL_PATH }}
+
       - name: 'Deploy to Azure Web App using ZipDeploy'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
@@ -112,4 +115,3 @@ jobs:
           app-name: 'croissantmc'
           slot-name: 'Production'
           package: release.zip
-          
