@@ -110,6 +110,7 @@ jobs:
 
       - name: Upload SSL Certificate
         run: |
+          chmod 777 /ssl
           printf "%s" "${{ secrets.SSL_CERTIFICATE }}" > /ssl/ssl.crt.pem
 
       - name: 'Deploy to Azure Web App using ZipDeploy'
