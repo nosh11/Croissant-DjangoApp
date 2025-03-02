@@ -110,7 +110,7 @@ jobs:
 
       - name: Upload SSL Certificate
         run: |
-          printf "%s" "${{ secrets.SSL_CERTIFICATE }}" | sudo tee /ssl/ssl.crt.pem
+          sudo printf "%s" "${{ secrets.SSL_CERTIFICATE }}" | sudo tee /ssl/ssl.crt.pem
 
       - name: 'Deploy to Azure Web App using ZipDeploy'
         uses: azure/webapps-deploy@v3
