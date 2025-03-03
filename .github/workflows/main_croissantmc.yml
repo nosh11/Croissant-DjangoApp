@@ -109,7 +109,7 @@ jobs:
         run: |
           sudo mkdir -p /home/site/wwwroot/ssl/
           sudo chmod 700 /home/site/wwwroot/ssl/
-          sudo echo -e "${{ secrets.SSL_CERTIFICATE }}" | sudo tee /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem
+          sudo echo "${{ secrets.SSL_CERTIFICATE }}" | base64 -d | sudo tee /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem
           sudo chmod 600 /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem
       
       - name: Check SSL Certificate
