@@ -99,7 +99,6 @@ if os.getenv("DJANGO_ENV") == "production":
             'PORT': os.getenv('PGPORT'),
             'OPTIONS': {
                 'ssl': {'ca': "/home/site/wwwroot/ssl/ssl.crt"},
-                'sslmode': 'verify-ca',
             }
         }
     }
