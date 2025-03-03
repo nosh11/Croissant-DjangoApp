@@ -26,10 +26,9 @@ SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
 
-ALLOWED_HOSTS = ['*']
-# [
-#     'croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 
-#     'localhost']
+ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost']
+
+ALLOWED_CIDR_NETS = ['169.254.0.0/16']
 
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net']
@@ -59,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allow_cidr.middleware.AllowCIDRMiddleware'
 ]
 
 ROOT_URLCONF = 'croissant.urls'
