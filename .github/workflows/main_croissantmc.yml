@@ -104,21 +104,18 @@ jobs:
                 "value": "true"
               }
             ]
-      
-      - name: Create directory for SSL Certificate
-        run: sudo mkdir -p /home/site/wwwroot/ssl/
 
       - name: Upload SSL Certificate
         run: |
-          sudo mkdir -p /ssl
-          sudo chmod 700 /ssl
+          sudo mkdir -p /home/site/wwwroot/ssl/
+          sudo chmod 700 /home/site/wwwroot/ssl/
           sudo echo -e "${{ secrets.SSL_CERTIFICATE }}" | sudo tee /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem
           sudo chmod 600 /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem
       
       - name: Check SSL Certificate
         run: |
           ls -l /home/site/wwwroot/ssl/
-          cat /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem | head -n 1
+          cat /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem | head -n 5
         
 
       - name: 'Deploy to Azure Web App using ZipDeploy'
