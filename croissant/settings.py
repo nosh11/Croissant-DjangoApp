@@ -89,6 +89,10 @@ WSGI_APPLICATION = 'croissant.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 if os.getenv("DJANGO_ENV") == "production":
     # ALLOWED_HOSTS.append(os.getenv("PGHOST"))
+    print(os.getenv("PGDATABASE"))
+    print(os.getenv("PGUSER"))
+    print(os.getenv("PGPASSWORD"))
+    print(os.getenv("PGHOST"))
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.mysql',
