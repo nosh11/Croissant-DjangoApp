@@ -26,12 +26,11 @@ SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
 
-ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost']
-
-ALLOWED_CIDR_NETS = ['169.254.0.0/16']
+ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost', '*'] + [f"169.254.{m}.{n}" for m in range(128, 255) for n in range(256)]
 
 
-CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net']
+
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net'] 
 
 STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
 
@@ -88,11 +87,7 @@ WSGI_APPLICATION = 'croissant.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 if os.getenv("DJANGO_ENV") == "production":
-    # ALLOWED_HOSTS.append(os.getenv("PGHOST"))
-    print(os.getenv("PGDATABASE"))
-    print(os.getenv("PGUSER"))
-    print(os.getenv("PGPASSWORD"))
-    print(os.getenv("PGHOST"))
+    ALLOWED_HOSTS.append(os.getenv("PGHOST"))
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.mysql',
