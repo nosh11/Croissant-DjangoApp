@@ -99,6 +99,7 @@ if os.getenv("DJANGO_ENV") == "production":
             'OPTIONS': {
                 'charset': 'utf8mb4',
                 'ssl': {'ca': "/home/site/wwwroot/ssl/ssl.crt"},
+                'sslmode': 'prefer',
             }
         }
     }
