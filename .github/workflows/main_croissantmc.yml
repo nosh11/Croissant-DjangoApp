@@ -114,8 +114,8 @@ jobs:
       
       - name: Check SSL Certificate
         run: |
-          ls -l /home/site/wwwroot/ssl/
-          cat /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem | head -n 5
+          sudo ls -l /home/site/wwwroot/ssl/
+          sudo cat /home/site/wwwroot/ssl/BaltimoreCyberTrustRoot.crt.pem | head -n 5
         
 
       - name: 'Deploy to Azure Web App using ZipDeploy'
