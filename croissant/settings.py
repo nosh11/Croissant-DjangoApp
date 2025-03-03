@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'croissant.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 if os.getenv("DJANGO_ENV") == "production":
-    ALLOWED_HOSTS.append(os.getenv("PGHOST"))
+    # ALLOWED_HOSTS.append(os.getenv("PGHOST"))
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.mysql',
@@ -97,9 +97,9 @@ if os.getenv("DJANGO_ENV") == "production":
             'PASSWORD': os.getenv('PGPASSWORD'),
             'HOST': os.getenv('PGHOST'),
             'PORT': os.getenv('PGPORT'),
-            # 'OPTIONS': {
-            #     'ssl': {'ca': "/home/site/wwwroot/ssl/ssl.crt"},
-            # }
+            'OPTIONS': {
+                'ssl': {'ca': "/home/site/wwwroot/ssl/DigiCertGlobalCA.crt.pem"},
+            }
         }
     }
 else:
