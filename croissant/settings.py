@@ -168,3 +168,5 @@ CSRF_COOKIE_SECURE = True    # 開発環境ではFalse、本番環境ではTrue�
 # メディアの設定
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+ALLOWED_HOSTS = ["*"]
