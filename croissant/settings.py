@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'False'
 
-ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost', '*'] + [f"169.254.{m}.{n}" for m in range(128, 255) for n in range(256)]
+ALLOWED_HOSTS = ['croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net', 'localhost']
+
+ALLOWED_HOSTS.append([f"169.254.{x}.{y}" for x in range(256) for y in range(256)])
 
 
 
