@@ -101,13 +101,30 @@ if os.getenv("DJANGO_ENV") == "production":
             }
         }
     }
-    # Azure Blob Storage
-    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-    AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
-    AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
-    AZURE_CONTAINER = "media"
-    AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-    MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
+    from azure.identity import DefaultAzureCredential
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.azure_storage.AzureStorage",
+            "OPTIONS": {
+                "token_credential": DefaultAzureCredential(),
+                "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
+                "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
+                "azure_container": "media",
+                "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.azure_storage.AzureStorage",
+            "OPTIONS": {
+                "token_credential": DefaultAzureCredential(),
+                "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
+                "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
+                "azure_container": "static",
+                "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
+            },
+        },
+    }
+
 else:
     DATABASES = {
         "default": {
@@ -118,31 +135,14 @@ else:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = '/media/'
 
-
-from azure.identity import DefaultAzureCredential
-
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.azure_storage.AzureStorage",
-        "OPTIONS": {
-            "token_credential": DefaultAzureCredential(),
-            "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
-            "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
-            "azure_container": "media",
-            "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
-        },
-    },
-    "staticfiles": {
-        "BACKEND": "storages.backends.azure_storage.AzureStorage",
-        "OPTIONS": {
-            "token_credential": DefaultAzureCredential(),
-            "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
-            "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
-            "azure_container": "static",
-            "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
-        },
-    },
-}
+    DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+    STATIC_URL = '/static/'
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATICFILES_DIRS = (
+        [
+            BASE_DIR / 'static'
+        ]
+    )
 
 
 # Password validation
@@ -174,24 +174,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATIC_URL = '/static/'
-
-# 読み込んだファイルをまとめて出力する先
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-STATICFILES_DIRS = (
-    [
-        BASE_DIR / 'static'
-    ]
-)
-
 
 
 # セッションの設定
