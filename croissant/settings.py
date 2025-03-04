@@ -119,6 +119,32 @@ else:
     MEDIA_URL = '/media/'
 
 
+from azure.identity import DefaultAzureCredential
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "token_credential": DefaultAzureCredential(),
+            "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
+            "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
+            "azure_container": "media",
+            "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "token_credential": DefaultAzureCredential(),
+            "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
+            "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
+            "azure_container": "static",
+            "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
+        },
+    },
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
