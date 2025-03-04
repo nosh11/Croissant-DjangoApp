@@ -272,7 +272,9 @@ iframe {
     margin: 10px 0;
     padding: 1px 1px;
     border-radius: 2%;
-    background-color: #f2f2f2;
+    background-color: #f0f0f0;
+    width: 560px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .portfolio-tag {
@@ -281,10 +283,10 @@ iframe {
     padding: 5px 10px;
     margin: 5px;
     border-radius: 5px;
-    background-color: #333;
+    background-color: #3f95ab;
     color: #fff;
     font-size: 14px;
-    transition: transform 0.1s ease-in-out;
+    transition: transform 0.08s ease-in-out;
     transform: scale(1);
 }
 
@@ -298,17 +300,18 @@ iframe {
 .portfolio-tag.selected {
     transform: scale(1.05);
     outline-offset: 2px;
-    outline: 2px solid rgb(190, 168, 129);
+    outline: 2px solid #3f95ab;
 }
+
 
 .portfolio-tag.selected:hover {
     transform: scale(1.05);
     outline-offset: 2px;
-    outline: 2px solid rgb(190, 168, 129);
+    outline: 2px solid #3f95ab;
 }
 
 .portfolio-tag:hover {
-    filter: sepia(100%);
+    filter: brightness(1.2);
     transform: scale(1.1);
     font-weight: bold;
 }
@@ -319,4 +322,5 @@ iframe {
     background-color: #f2f2f2;
     padding: 10px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 560px;
 }

@@ -13,12 +13,11 @@
     <div class="description">{{ portfolio.description }}</div>
 
 
-    
-    {% for tag in portfolio.tags.all %}
-        <div class="portfolio-tag">
-            <p>{{ tag.name }}</p>
-        </div>
-    {% endfor %}
+    <div class="portfolio-tags">
+        {% for tag in portfolio.tags.all %}
+            <a href="{% url 'portfolio_by_tag' tag.id %}" class="portfolio-tag">{{ tag.name }}</a>
+        {% endfor %}
+    </div>
         
 
     <a href="/portfolio/edit/{{ portfolio.id }}">Edit</a>
