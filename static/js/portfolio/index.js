@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const imageUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
             const img = document.createElement('img');
             img.src = imageUrl;
-            img.className = 'portfolio-image';
+            img.className = 'portfolio-thumbnail';
             item.appendChild(img);
         }
     });

@@ -22,8 +22,10 @@
     font-family: "Zen Maru Gothic", serif;
     font-weight: 400;
     grid-area: header;
-    background-color: rgba(219, 219, 219, 0.9);
-    padding: 10px;
+    background-color: rgba(234, 234, 234, 0.9);
+    outline: rgba(221, 221, 221, 0.9);
+    outline-width: 1px;
+    outline-style: solid;
 }
 
 .page-header .menu-bar {
@@ -32,9 +34,12 @@
 }
 
 .page-header .title {
+    font-family: "Arial Black", sans-serif;
+
     color: #242424;
     font-size: 40px;
     font-weight: 600;
+    text-decoration: none;
 }
 
 .page-header .item {
@@ -179,8 +184,15 @@ a:hover {
 }
 
 .portfolio-image {
-    width: 100%;
-    height: 200px;
+    width: 560px;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.portfolio-thumbnail {
+    width: 200px;
+    height: 150px;
     object-fit: cover;
     border-radius: 10px;
 }
