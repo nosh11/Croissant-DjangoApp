@@ -13,7 +13,7 @@ class PortFolio(models.Model):
     image = models.ImageField(upload_to='portfolio/images/', blank=True, null=True)
     url = models.URLField(max_length=200, blank=True, null=True)
 
-    tags = models.ForeignKey(Tag, on_delete=models.CASCADE, blank=True, null=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return self.title

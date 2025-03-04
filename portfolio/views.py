@@ -40,6 +40,8 @@ class PortfolioCreateView(View):
                 portfolio.description = form.cleaned_data['description']
                 portfolio.image = form.cleaned_data['image']
                 portfolio.url = form.cleaned_data['url']
+                portfolio.tags.set(form.cleaned_data['tags'])
+                
                 portfolio.save()
                 return redirect('index')
             else:

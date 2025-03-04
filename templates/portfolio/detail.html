@@ -14,7 +14,16 @@
         {% endif %}
     {% endif %}
     <br>
-    <p>Description: {{ portfolio.description }}</p>
+    <div class="description">{{ portfolio.description }}</div>
+
+
+    
+    {% for tag in portfolio.tags.all %}
+        <div class="portfolio-tag">
+            <p>{{ tag.name }}</p>
+        </div>
+    {% endfor %}
+        
 
     <a href="/portfolio/edit/{{ portfolio.id }}">Edit</a>
     <a href="/portfolio/delete/{{ portfolio.id }}">Delete</a>

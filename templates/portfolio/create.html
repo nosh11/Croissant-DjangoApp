@@ -5,38 +5,8 @@
     <p>作成するために、以下のフォームに情報を入力してください。</p>
     <form action="{% if pk %}/portfolio/edit/{{ pk }}/{% else %}/portfolio/create/{% endif %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.non_field_errors }}
-
-        <label for="title">Title:</label>
-        {{ form.title.errors }}
-        {{ form.title }}
-
-        <label for="image">Image:</label>
-        {{ form.image.errors }}
-        {{ form.image }}
-        <img id="thumbnail-preview" class="thumbnail-image" style="display: none;">
-
-
-        <label for="url">URL:</label>
-        {{ form.url.errors }}
-        {{ form.url }}
-        <button type="button" id="fetch-thumbnail">YoutubeサムネイルをImageに設定する</button>
-
-        <label for="description">Description:</label>
-        {{ form.description.errors }}
-        {{ form.description }}
-
-        <label for="tags">Tags:</label>
-        {{ form.tags.errors }}
-        {{ form.tags }}
-        {% for tag in tags %}
-            <input type="checkbox" name="tags" value="{{ tag.id }}" {% if tag.id in selected_tags %}checked{% endif %}>
-            <label>{{ tag.name }}</label>
-        {% endfor %}
-
-
-
-        <input type="submit" value="Submit">
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
     </form>
     <a href="/portfolio">Back to list</a>
 {% endblock %}
