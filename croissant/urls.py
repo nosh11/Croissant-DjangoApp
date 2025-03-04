@@ -28,6 +28,8 @@ urlpatterns = [
     path('',  views.root),
 ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.DEBUG:
+if settings.MEDIA_ROOT and settings.MEDIA_URL:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.STATIC_ROOT and settings.STATIC_URL:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
