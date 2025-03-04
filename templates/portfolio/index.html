@@ -2,28 +2,13 @@
 
 {% block title %}一覧{% endblock %}
 
-
 {% load static %}
 {% block content %}
     <p>ポートフォリオ一覧</p>
     <div class="portfolio">
         {% for portfolio in portfolios %}
-            <a href="/portfolio/detail/{{ portfolio.id }}" class="portfolio-item">
+            <a href="/portfolio/detail/{{ portfolio.id }}" class="portfolio-item" data-url="{{ portfolio.url }}">
                 <p>{{ portfolio.title }}</p>
-
-                {% if portfolio.url and 'youtube.com' in portfolio.url or 'youtu.be' in portfolio.url %}
-                    <img 
-                        src="https://img.youtube.com/vi/{{ portfolio.url|slice:'-11:' }}/hqdefault.jpg" 
-                        class="portfolio-image"
-                    >
-                    <img onclick="location.href='/portfolio/detail/{{ portfolio.id }}';"
-                        src="{% static 'images/youtube-icon.png' %}" 
-                        class="youtube-icon"
-                        alt="YouTube Icon"
-                    >
-                {% elif portfolio.image %}
-                <img src="{{ MEDIA_URL }}{{ portfolio.image }}" class="portfolio-image">
-                {% endif %}
             </a>
         {% endfor %}
     </div>
@@ -31,39 +16,5 @@
     <a href="/portfolio/tag/" class="url">タグの設定</a>
     <a href="/" class="url">Back to Home</a>
 
-    <script type="text/javascript" charset="utf-8">
-        function isValidYouTubeUrl(url) {
-            return /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/.test(url);
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('fetch-thumbnail').addEventListener('click', function() {
-                const url = document.getElementById('id_url').value;
-                if (!isValidYouTubeUrl(url)) {
-                    return;
-                }
-                fetch('/portfolio/fetch-thumbnail/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}'
-                    },
-                    body: JSON.stringify({ url: url })
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTPエラー: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const thumbnailPreview = document.getElementById('thumbnail-preview');
-                    thumbnailPreview.src = data.thumbnail_url;
-                    thumbnailPreview.style.display = 'block';
-                    document.getElementById('id_image').src = data.thumbnail_url;
-                    const form_image = document.getElementById('id_image');
-                    form_image.value = data.thumbnail_url;
-                })
-            });
-        });
-    </script>
+    <script src="{% static 'js/portfolio/index.js' %}"></script>
 {% endblock %}

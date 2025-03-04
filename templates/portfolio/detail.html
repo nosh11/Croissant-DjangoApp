@@ -1,17 +1,13 @@
 {% extends 'portfolio/base.html' %}
 {% block title %}詳細{% endblock %}
 
+{% load static %}
 {% block content %}
     <h1>{{ portfolio.title }}</h1>
+    <div id="youtube-embed-container" data-url="{{ portfolio.url }}"></div>
 
-    {% if url_tag and "www.youtube.com" in portfolio.url %}
-        <div>{{ url_tag | safe }}</div>
-
-    {% elif portfolio.image %}
+    {% if portfolio.image %}
         <img src="{{ portfolio.image.url }}" alt="portfolio image" class="portfolio-image">
-        {% if url_tag %}
-            <div>{{ url_tag | safe }}</div>
-        {% endif %}
     {% endif %}
     <br>
     <div class="description">{{ portfolio.description }}</div>
@@ -28,4 +24,5 @@
     <a href="/portfolio/edit/{{ portfolio.id }}">Edit</a>
     <a href="/portfolio/delete/{{ portfolio.id }}">Delete</a>
     <a href="/portfolio">Back to list</a>
+    <script src="{% static 'js/portfolio/detail.js' %}"></script>
 {% endblock %}
