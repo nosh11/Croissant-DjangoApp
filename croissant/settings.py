@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +106,8 @@ if os.getenv("DJANGO_ENV") == "production":
     AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
     AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
     AZURE_CONTAINER = "media"
+    AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+    MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
     
 else:
     DATABASES = {
@@ -113,6 +116,9 @@ else:
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
 
 
 # Password validation
@@ -170,8 +176,3 @@ SESSION_COOKIE_HTTPONLY = True  # クッキーをJavaScriptからアクセスで
 SESSION_COOKIE_SAMESITE = 'Strict'  # クロスサイトリクエストフォージェリ (CSRF) 保護のためにStrictに設定
 SESSION_COOKIE_SECURE = True  # 開発環境ではFalse、本番環境ではTrueに設定
 CSRF_COOKIE_SECURE = True    # 開発環境ではFalse、本番環境ではTrueに設定
-
-
-# メディアの設定
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
