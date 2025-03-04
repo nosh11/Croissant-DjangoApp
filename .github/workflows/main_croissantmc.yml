@@ -30,7 +30,9 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip-compile requirements.in
+          pip install -r requirements.txt
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
