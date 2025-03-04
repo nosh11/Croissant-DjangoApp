@@ -264,7 +264,19 @@ iframe {
     outline: 2px solid orangered;
 }
 
+.portfolio-tags {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    padding: 1px 1px;
+    border-radius: 2%;
+    background-color: #f2f2f2;
+}
+
 .portfolio-tag {
+    text-decoration: none;
     display: inline-block;
     padding: 5px 10px;
     margin: 5px;
@@ -272,13 +284,33 @@ iframe {
     background-color: #333;
     color: #fff;
     font-size: 14px;
-
     transition: transform 0.1s ease-in-out;
     transform: scale(1);
 }
 
+.portfolio-tag.special {
+    background-color: #fff;
+    border-color: #161616;
+    color: #333;
+    margin: 5px 15px; /* 横方向のmarginを広く */
+}
+
+.portfolio-tag.selected {
+    transform: scale(1.05);
+    outline-offset: 2px;
+    outline: 2px solid rgb(190, 168, 129);
+}
+
+.portfolio-tag.selected:hover {
+    transform: scale(1.05);
+    outline-offset: 2px;
+    outline: 2px solid rgb(190, 168, 129);
+}
+
 .portfolio-tag:hover {
+    filter: sepia(100%);
     transform: scale(1.1);
+    font-weight: bold;
 }
 
 .description {

@@ -6,7 +6,7 @@
 {% load static %}
 {% block content %}
     <p>タグの一覧</p>
-    <div class="portfolio">
+    <div class="portfolio-tags">
         {% for tag in tags %}
             <div onclick="location.href='/portfolio/tag/edit/{{ tag.id }}';" class="portfolio-tag">
                 <p>{{ tag.name }}</p>
