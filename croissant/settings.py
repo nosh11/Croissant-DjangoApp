@@ -110,8 +110,6 @@ if os.getenv("DJANGO_ENV") == "production":
                 "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
                 "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
                 "azure_container": "media",
-                "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
-                "sas_token": os.getenv('AZURE_SAS_TOKEN'),
             },
         },
         "staticfiles": {
@@ -121,8 +119,6 @@ if os.getenv("DJANGO_ENV") == "production":
                 "account_name": os.getenv('AZURE_ACCOUNT_NAME'),
                 "account_key": os.getenv('AZURE_ACCOUNT_KEY'),
                 "azure_container": "static",
-                "connection_string": os.getenv('AZURE_STORAGE_CONNECTION_STRING'),
-                "sas_token": os.getenv('AZURE_SAS_TOKEN'),
             },
         },
     }
