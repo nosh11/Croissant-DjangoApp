@@ -93,6 +93,7 @@ if os.getenv("DJANGO_ENV") == "production":
     AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
     MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
     STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
 else:
     DATABASES = {
         "default": {
