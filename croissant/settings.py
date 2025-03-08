@@ -8,7 +8,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v'
+if os.getenv("DJANGO_ENV") == "production":
+    SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+else:
+    SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v' # 本番環境では環境変数に設定
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_ENV") != "production"
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'allow_cidr',
 ]
 
 MIDDLEWARE = [
@@ -92,6 +96,7 @@ if not DEBUG:
     AZURE_CONTAINER = "media"
     AZURE_STATIC_CONTAINER = "static"
     AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
 else:
     # 開発環境
