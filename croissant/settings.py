@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 
                         'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net',
-                        'https://www.croissantmc.com']
+                        'https://www.croissantmc.net']
 
 # Application definition
 
