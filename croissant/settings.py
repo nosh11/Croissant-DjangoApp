@@ -15,7 +15,9 @@ DEBUG = os.getenv("DJANGO_ENV") != "production"
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 
+                        'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net',
+                        'https://www.croissantmc.com']
 
 # Application definition
 
@@ -69,7 +71,8 @@ WSGI_APPLICATION = 'croissant.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-if os.getenv("DJANGO_ENV") == "production":
+if not DEBUG:
+    # 本番環境
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.mysql',
@@ -83,7 +86,6 @@ if os.getenv("DJANGO_ENV") == "production":
             }
         }
     }
-    from azure.identity import DefaultAzureCredential
     DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
     AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
     AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
@@ -91,8 +93,8 @@ if os.getenv("DJANGO_ENV") == "production":
     AZURE_STATIC_CONTAINER = "static"
     AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
     MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
-    
 else:
+    # 開発環境
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
