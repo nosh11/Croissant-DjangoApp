@@ -20,7 +20,12 @@ def index(request, tag_id=None):
     return render(request, 'portfolio/index.html', {'portfolios': portfolios, 'tags': tags, 'selected_tag_id': tag_id})
 
 # Create
-class PortfolioCreateView(View):
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+class PortfolioCreateView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.has_perm('portfolio.add_portfolio')
+
     def get(self, request, pk=None):
         if pk:
             portfolio = PortFolio.objects.get(pk=pk)

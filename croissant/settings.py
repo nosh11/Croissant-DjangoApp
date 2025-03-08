@@ -150,3 +150,8 @@ SESSION_COOKIE_HTTPONLY = True  # クッキーをJavaScriptからアクセスで
 SESSION_COOKIE_SAMESITE = 'Strict'  # クロスサイトリクエストフォージェリ (CSRF) 保護のためにStrictに設定
 SESSION_COOKIE_SECURE = True  # 開発環境ではFalse、本番環境ではTrueに設定
 CSRF_COOKIE_SECURE = True    # 開発環境ではFalse、本番環境ではTrueに設定
+
+
+LOGIN_URL = '/admin/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

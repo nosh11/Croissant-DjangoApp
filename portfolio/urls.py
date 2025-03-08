@@ -4,8 +4,8 @@ from portfolio import views, tag_views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("create/", views.create, name="create"),
-    path("edit/<int:pk>/", views.create, name="edit"),
+    path("create/", views.PortfolioCreateView.as_view(), name="create"),
+    path("edit/<int:pk>/", views.PortfolioCreateView.as_view(), name="edit"),
     path("detail/<int:pk>/", views.detail, name="detail"),
     path("delete/<int:pk>", views.delete, name="delete"),
     path("tag/", tag_views.index, name="tag"),
