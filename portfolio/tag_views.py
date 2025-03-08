@@ -16,6 +16,9 @@ index = PortfolioTagListView.as_view()
 
 # Create
 class PortfolioTagCreateView(View):
+    def test_func(self):
+        return self.request.user.has_perm('portfolio.add_tag')
+    
     def get(self, request, pk=None):
         if pk:
             tag = Tag.objects.get(pk=pk)
@@ -41,6 +44,9 @@ class PortfolioTagCreateView(View):
 create = PortfolioTagCreateView.as_view()
 
 class PortfolioTagDeleteView(View):
+    def test_func(self):
+        return self.request.user.has_perm('portfolio.delete_tag')
+    
     def get(self, request, pk):
         tag = Tag.objects.get(pk=pk)
         tag.delete()

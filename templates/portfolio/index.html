@@ -23,7 +23,7 @@
         {% for tag in tags %}
             <a href="{% url 'portfolio_by_tag' tag.id %}" class="{% if selected_tag_id == tag.id %} portfolio-tag selected {% else %} portfolio-tag {% endif %}">{{ tag.name }}</a>
         {% endfor %}
-        <a href="/portfolio/tag/" class="portfolio-tag special">タグの設定</a>
+        <a href="/portfolio/tag/" class="portfolio-tag special">タグの一覧</a>
     </div>
 
     <a href="/portfolio/create" class="url">作成</a>
