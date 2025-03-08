@@ -35,7 +35,6 @@
 
 .page-header .title {
     font-family: "Arial Black", sans-serif;
-
     color: #242424;
     font-size: 40px;
     font-weight: 600;
@@ -184,8 +183,8 @@ a:hover {
 }
 
 .portfolio-image {
-    width: 560px;
-    height: 420px;
+    width: 720px;
+    height: auto;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -259,7 +258,6 @@ iframe {
     100% { left: 0; transform: translate(-100%); }
   }
 
-
 .youtube-icon {
     width: 50px;
     height: 50px;
@@ -268,12 +266,6 @@ iframe {
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.1s ease-in-out outline 0.1s ease-in-out;
-}
-
-.youtube-icon:hover {
-    transform: translateY(-20px) scale(1.1);
-    outline-offset: 2px;
-    outline: 2px solid orangered;
 }
 
 .portfolio-tags {
