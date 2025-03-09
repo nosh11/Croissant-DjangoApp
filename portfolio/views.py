@@ -55,7 +55,6 @@ class PortfolioCreateView(LoginRequiredMixin, UserPassesTestMixin, View):
                 return redirect('index')
         
         return render(request, 'portfolio/create.html', {'form': form, 'error': '入力内容が正しくありません'})
-create = PortfolioCreateView.as_view()
 
 class PortfolioDetailView(View):
     def get(self, request, pk):
@@ -66,7 +65,10 @@ class PortfolioDetailView(View):
 detail = PortfolioDetailView.as_view()
 
 
-class DeletePortfolioView(View):
+class DeletePortfolioView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.has_perm('portfolio.delete_portfolio')
+    
     def get(self, request, pk):
         if not pk:
             return redirect('index')
@@ -75,4 +77,3 @@ class DeletePortfolioView(View):
         portfolio.delete()
 
         return redirect('index')
-delete = DeletePortfolioView.as_view()

@@ -6,6 +6,8 @@ from django.views import View
 from portfolio.forms import PortfolioTagForm
 from portfolio.models import PortFolio, Tag
 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 # Index
 class PortfolioTagListView(View):
     def get(self, request):
@@ -15,7 +17,7 @@ index = PortfolioTagListView.as_view()
 
 
 # Create
-class PortfolioTagCreateView(View):
+class PortfolioTagCreateView(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
         return self.request.user.has_perm('portfolio.add_tag')
     
@@ -43,7 +45,7 @@ class PortfolioTagCreateView(View):
         return render(request, 'portfolio/tag/create.html', {'form': form, 'error': '入力内容が正しくありません'})
 create = PortfolioTagCreateView.as_view()
 
-class PortfolioTagDeleteView(View):
+class PortfolioTagDeleteView(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
         return self.request.user.has_perm('portfolio.delete_tag')
     
