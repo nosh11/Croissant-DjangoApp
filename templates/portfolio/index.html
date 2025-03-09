@@ -9,7 +9,10 @@
     <div class="portfolio">
         {% if portfolios %}
             {% for portfolio in portfolios %}
-                <a href="/portfolio/detail/{{ portfolio.id }}" class="portfolio-item" data-url="{{ portfolio.url }}">
+                <a  href="/portfolio/detail/{{ portfolio.id }}" 
+                    class="portfolio-item" 
+                    data-url="{{ portfolio.url }}"
+                    data-img="{% if portfolio.image %}{{ portfolio.image.url }}{% endif %}">
                     <p>{{ portfolio.title }}</p>
                 </a>
             {% endfor %}

@@ -1,7 +1,7 @@
 function getYouTubeEmbed(youtubeURL) {
     const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^?&]+)/;
     const match = youtubeURL.match(regex);
-    return match ? `<iframe width='560' height='315' src='https://www.youtube-nocookie.com/embed/${match[1]}' frameborder='0' allowfullscreen></iframe>` : null;
+    return match ? `<iframe src='https://www.youtube-nocookie.com/embed/${match[1]}' frameborder='0' allowfullscreen></iframe>` : null;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

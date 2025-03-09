@@ -26,6 +26,16 @@ document.addEventListener('DOMContentLoaded', function() {
     portfolioItems.forEach(function(item) {
         const url = item.getAttribute('data-url');
         const videoId = getYoutubeId(url);
+        
+        const image = item.getAttribute("data-img");
+        if (item.getAttribute("data-img")) {
+            const img = document.createElement('img');
+            console.log(image);
+            img.src = image;
+            img.className = 'portfolio-thumbnail';
+            item.appendChild(img);
+        } else
+
         if (videoId) {
             const imageUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`;
             const img = document.createElement('img');

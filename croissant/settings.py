@@ -1,26 +1,20 @@
 import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-if os.getenv("DJANGO_ENV") == "production":
-    SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
-else:
-    SECRET_KEY = 'django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v' # 本番環境では環境変数に設定
-
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-q710#gs0q#n!$y7apgjgf1e%%c@z%lzsg&vuv#3sd&2d+gjx$v")
 DEBUG = os.getenv("DJANGO_ENV") != "production"
 
-ALLOWED_HOSTS = ["*"]
-
-CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 
-                        'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net',
-                        'https://www.croissantmc.net']
+if DEBUG:
+    ALLOWED_HOSTS = ["*"]
+    CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
+else:
+    ALLOWED_HOSTS = ["localhost", 
+                     "www.croissantmc.net",
+                     "croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net"]
+    CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 
+                            'https://croissantmc-cmb5drgfcpffg6bm.japaneast-01.azurewebsites.net',
+                            'https://www.croissantmc.net']
 
 # Application definition
 
@@ -76,7 +70,7 @@ WSGI_APPLICATION = 'croissant.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 if not DEBUG:
-    # 本番環境
+    # Production environment
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.mysql',
@@ -90,27 +84,32 @@ if not DEBUG:
             }
         }
     }
-    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-    AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
-    AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
-    AZURE_CONTAINER = "media"
-    AZURE_STATIC_CONTAINER = "static"
-    AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
 else:
-    # 開発環境
+    # Development environment
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = '/media/'
 
-STATIC_FILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_URL = '/static/'
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME', "dummy")
+AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY', "dummy")
+AZURE_CONTAINER = "media"
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+MEDIA_URL = '/media/' if DEBUG else f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
+MEDIA_ROOT = 'media' if DEBUG else None
+
+# Azure Blob Storage for static files
+if not DEBUG:
+    STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+    AZURE_STATIC_CONTAINER = "static"
+    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
+else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_URL = '/static/'
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
     [
@@ -153,9 +152,8 @@ USE_TZ = True
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7  # セッションの有効期限を1週間に設定
 SESSION_COOKIE_HTTPONLY = True  # クッキーをJavaScriptからアクセスできないように設定
 SESSION_COOKIE_SAMESITE = 'Strict'  # クロスサイトリクエストフォージェリ (CSRF) 保護のためにStrictに設定
-SESSION_COOKIE_SECURE = True  # 開発環境ではFalse、本番環境ではTrueに設定
-CSRF_COOKIE_SECURE = True    # 開発環境ではFalse、本番環境ではTrueに設定
-
+SESSION_COOKIE_SECURE = not DEBUG  # Set to False in development, True in production
+CSRF_COOKIE_SECURE = not DEBUG    # Set to False in development, True in production
 
 LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = '/'

@@ -154,7 +154,7 @@ a:hover {
 /* ポートフォリオ */
 .portfolio {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 200px以上の幅を持つ列を作成 */
+    grid-template-columns: repeat(auto-fill, minmax(400px, 2fr)); 
     gap: 20px; /* グリッド間の間隔 */
     padding: 20px; /* グリッドの外側の余白 */
     justify-content: center; /* グリッドを中央揃え */
@@ -190,8 +190,8 @@ a:hover {
 }
 
 .portfolio-thumbnail {
-    width: 200px;
-    height: 150px;
+    width: 400px;
+    height: auto;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -202,27 +202,11 @@ h1 {
     margin: 20px 0;
 }
 
-/* テーブル */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 20px 0;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-
 iframe {
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 720px;
+    height: 405px;
 }
 
 
@@ -257,16 +241,6 @@ iframe {
       0% { left: 100%; transform: translate(0); }
     100% { left: 0; transform: translate(-100%); }
   }
-
-.youtube-icon {
-    width: 50px;
-    height: 50px;
-    transform: translateY(-20px);
-    margin: -20px 0;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.1s ease-in-out outline 0.1s ease-in-out;
-}
 
 .portfolio-tags {
     display: flex;
@@ -323,7 +297,6 @@ iframe {
 .description {
     font-size: 16px;
     margin: 10px 0;
-    background-color: #f2f2f2;
     padding: 10px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
     width: 560px;
