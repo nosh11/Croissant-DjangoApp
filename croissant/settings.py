@@ -99,7 +99,7 @@ AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY', "dummy")
 AZURE_CONTAINER = "media"
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 MEDIA_URL = '/media/' if DEBUG else f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
-MEDIA_ROOT = 'media' if DEBUG else None
+MEDIA_ROOT = os.getenv("ENV_MEDIA_ROOT", 'media')
 
 # Azure Blob Storage for static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
