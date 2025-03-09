@@ -33,14 +33,11 @@ class PortfolioTagCreateView(LoginRequiredMixin, UserPassesTestMixin, View):
     def post(self, request, pk=None):
         form = PortfolioTagForm(request.POST)
         if form.is_valid():
+            tag = form.save(commit=False)
             if pk:
-                tag = Tag.objects.get(pk=pk)
-                tag.name = form.cleaned_data['name']
-                tag.save()
-                return redirect('tag')
-            else:
-                form.save()
-                return redirect('tag')
+                tag.pk = pk
+            tag.save()
+            return redirect('tag')
 
         return render(request, 'portfolio/tag/create.html', {'form': form, 'error': '入力内容が正しくありません'})
 create = PortfolioTagCreateView.as_view()

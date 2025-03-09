@@ -15,7 +15,7 @@
 
     <div class="portfolio-tags">
         {% for tag in portfolio.tags.all %}
-            <a href="{% url 'portfolio_by_tag' tag.id %}" class="portfolio-tag">{{ tag.name }}</a>
+            <a href="{% url 'portfolio_by_tag' tag.id %}" class="portfolio-tag" data-color="{{ tag.color }}">{{ tag.name }}</a>
         {% endfor %}
     </div>
         

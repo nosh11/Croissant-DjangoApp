@@ -24,13 +24,15 @@
     <div class="portfolio-tags">
         <a href="{% url 'index' %}" class="{% if not selected_tag_id %}portfolio-tag selected special{% else %}portfolio-tag special{% endif %}">すべて</a>
         {% for tag in tags %}
-            <a href="{% url 'portfolio_by_tag' tag.id %}" class="{% if selected_tag_id == tag.id %} portfolio-tag selected {% else %} portfolio-tag {% endif %}">{{ tag.name }}</a>
+            <a 
+                href="{% url 'portfolio_by_tag' tag.id %}" 
+                class="{% if selected_tag_id == tag.id %} portfolio-tag selected {% else %} portfolio-tag {% endif %}"
+                data-color="{{ tag.color }}">{{ tag.name }}</a>
         {% endfor %}
         <a href="/portfolio/tag/" class="portfolio-tag special">タグの一覧</a>
     </div>
 
     <a href="/portfolio/create" class="url">作成</a>
     <a href="/" class="url">Back to Home</a>
-
     <script src="{% static 'js/portfolio/index.js' %}"></script>
 {% endblock %}

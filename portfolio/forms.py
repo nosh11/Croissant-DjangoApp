@@ -1,5 +1,6 @@
 from portfolio.models import PortFolio, Tag
 from django import forms
+from colorfield.forms import ColorField
 
 
 class PortfolioForm(forms.ModelForm):
@@ -24,6 +25,9 @@ class PortfolioForm(forms.ModelForm):
 
 
 class PortfolioTagForm(forms.ModelForm):
+    name = forms.CharField(label='タグ名', max_length=50)
+    color = ColorField(initial="#FF0000")
+
     class Meta:
         model = Tag
-        fields = ['name']
+        fields = ['name', 'color']

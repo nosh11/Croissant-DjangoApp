@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'allow_cidr',
+    'colorfield'
 ]
 
 MIDDLEWARE = [

@@ -40,21 +40,21 @@ class PortfolioCreateView(LoginRequiredMixin, UserPassesTestMixin, View):
     def post(self, request, pk=None):
         form = PortfolioForm(request.POST, request.FILES)
         if form.is_valid():
+            portfolio = form.save(commit=False)
             if pk:
-                portfolio = PortFolio.objects.get(pk=pk)
-                portfolio.title = form.cleaned_data['title']
-                portfolio.description = form.cleaned_data['description']
-                portfolio.image = form.cleaned_data['image']
-                portfolio.url = form.cleaned_data['url']
-                portfolio.tags.set(form.cleaned_data['tags'])
-                
-                portfolio.save()
-                return redirect('index')
-            else:
-                form.save()
-                return redirect('index')
+                portfolio.pk = pk
+                # 画像が変更されていない場合、既存の画像を保持
+                if 'image' not in request.FILES:
+                    portfolio.image = PortFolio.objects.get(pk=pk).image
+            portfolio.save()
+            form.save_m2m()
+            form.save()
+            return redirect('index')
         
-        return render(request, 'portfolio/create.html', {'form': form, 'error': '入力内容が正しくありません'})
+        error_message = '入力内容が正しくありません。以下のエラーを確認してください:'
+        for field, errors in form.errors.items():
+            error_message += f' {field}: {", ".join(errors)}'
+        return render(request, 'portfolio/create.html', {'form': form, 'error': error_message})
 
 class PortfolioDetailView(View):
     def get(self, request, pk):

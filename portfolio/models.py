@@ -1,8 +1,10 @@
 from django.db import models
+from colorfield.fields import ColorField
 
 # Create your models here.
 class Tag(models.Model):
     name = models.CharField(max_length=50)
+    color = ColorField(default='#533fab', format='hex')
 
     def __str__(self):
         return self.name
