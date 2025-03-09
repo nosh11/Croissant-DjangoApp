@@ -93,23 +93,52 @@ else:
         }
     }
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME', "dummy")
-AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY', "dummy")
-AZURE_CONTAINER = "media"
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-MEDIA_URL = '/media/' if DEBUG else f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
-MEDIA_ROOT = os.getenv("ENV_MEDIA_ROOT", 'media')
+# Media and static files (CSS, JavaScript, images)
 
-# Azure Blob Storage for static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = (
-    [
+account_name = os.getenv('AZURE_ACCOUNT_NAME')
+account_key = os.getenv('AZURE_ACCOUNT_KEY')
+
+if account_key and account_name:# and not DEBUG:
+    # 本番環境の場合
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.azure_storage.AzureStorage",
+            "OPTIONS": {
+                "account_name": account_name,
+                "account_key": account_key,
+                "azure_container": "media",
+            }
+        },
+        "staticfiles": {
+            "BACKEND": "storages.backends.azure_storage.AzureStorage",
+            "OPTIONS": {
+                "account_name": account_name,
+                "account_key": account_key,
+                "azure_container": "static",
+            }
+        }
+    }
+    DEFAULT_FILE_STORAGE = "storages.backends.azure_storage.AzureStorage"
+    STATICFILES_STORAGE = "storages.backends.azure_storage.AzureStorage"
+    MEDIA_URL = f"https://{account_name}.blob.core.windows.net/media/"
+    STATIC_URL = f"https://{account_name}.blob.core.windows.net/static/"
+    MEDIA_ROOT = BASE_DIR / 'media'
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATICFILES_DIRS = [
         BASE_DIR / 'static'
     ]
-)
+
+else:
+    # 開発環境の場合
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    MEDIA_URL = '/media/'
+    STATIC_URL = '/static/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
