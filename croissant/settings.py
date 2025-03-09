@@ -102,14 +102,8 @@ MEDIA_URL = '/media/' if DEBUG else f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTA
 MEDIA_ROOT = 'media' if DEBUG else None
 
 # Azure Blob Storage for static files
-if not DEBUG:
-    STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-    AZURE_STATIC_CONTAINER = "static"
-    STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
-else:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    STATIC_URL = '/static/'
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
     [
