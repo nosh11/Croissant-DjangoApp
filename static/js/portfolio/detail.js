@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const youtube_embed = url && getYouTubeEmbed(url);
         if (youtube_embed) {
             element.innerHTML = youtube_embed;
+        } else if (url) {
+            element.innerHTML = `<a href='${url}' target='_blank'>${url}</a>`;
         }
     }
 });
