@@ -62,6 +62,8 @@ django==5.1.6
     #   django-storages
 django-allow-cidr==0.7.1
     # via -r requirements.in
+django-colorfield==0.12.0
+    # via -r requirements.in
 django-storages==1.14.5
     # via -r requirements.in
 idna==3.10
@@ -91,7 +93,9 @@ packaging==24.2
     #   build
     #   django-allow-cidr
 pillow==11.1.0
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   django-colorfield
 pip-tools==7.4.1
     # via -r requirements.in
 portalocker==2.10.1
