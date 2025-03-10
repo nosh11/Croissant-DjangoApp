@@ -12,16 +12,21 @@
     <br>
     <div class="description">{{ portfolio.description }}</div>
 
-
     <div class="portfolio-tags">
         {% for tag in portfolio.tags.all %}
             <a href="{% url 'portfolio_by_tag' tag.id %}" class="portfolio-tag" data-color="{{ tag.color }}">{{ tag.name }}</a>
         {% endfor %}
     </div>
-        
 
     <a href="/portfolio/edit/{{ portfolio.id }}">Edit</a>
-    <a href="/portfolio/delete/{{ portfolio.id }}">Delete</a>
+    <a href="/portfolio/delete/{{ portfolio.id }}" id="delete-link">Delete</a>
     <a href="/portfolio">Back to list</a>
     <script src="{% static 'js/portfolio/detail.js' %}"></script>
+    <script>
+        document.getElementById('delete-link').addEventListener('click', function(event) {
+            if (!confirm('本当に削除してよろしいですか？')) {
+                event.preventDefault();
+            }
+        });
+    </script>
 {% endblock %}
