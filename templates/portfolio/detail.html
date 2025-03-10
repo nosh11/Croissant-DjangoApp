@@ -10,7 +10,7 @@
         <img src="{{ portfolio.image.url }}" alt="portfolio image" class="portfolio-image">
     {% endif %}
     <br>
-    <div class="description">{{ portfolio.description }}</div>
+    <p class="description">{{ portfolio.description | linebreaksbr }}</p>
 
     <div class="portfolio-tags">
         {% for tag in portfolio.tags.all %}

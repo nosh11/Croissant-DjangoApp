@@ -8,6 +8,8 @@ urlpatterns = [
     path("edit/<int:pk>/", views.PortfolioCreateView.as_view(), name="edit"),
     path("detail/<int:pk>/", views.detail, name="detail"),
     path("delete/<int:pk>", views.DeletePortfolioView.as_view(), name="delete"),
+    path("about/", views.about, name="about"),
+
     path("tag/", tag_views.index, name="tag"),
     path("tag/create/", tag_views.PortfolioTagCreateView.as_view(), name="tag_create"),
     path("tag/edit/<int:pk>/", tag_views.PortfolioTagCreateView.as_view(), name="tag_edit"),

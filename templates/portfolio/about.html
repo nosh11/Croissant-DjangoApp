@@ -1,0 +1,53 @@
+{% extends 'portfolio/base.html' %}
+{% block title %}自己紹介{% endblock %}
+
+{% load static %}
+{% block content %}
+    <h1>self introduction</h1>
+
+    <p class="description">
+        こんにちは。<br>
+        私は大学で情報工学を学んでいます。<br>
+        趣味は個人開発、作曲、散歩です。<br>
+    </p>
+
+    {% if portfolio %}
+    <div class="portfolio">
+        <a  href="/portfolio/detail/{{ portfolio.id }}" 
+            class="portfolio-item" 
+            data-url="{{ portfolio.url }}"
+            data-img="{% if portfolio.image %}{{ portfolio.image.url }}{% endif %}">
+            <p>{{ portfolio.title }}</p>
+        </a>
+    </div>
+    {% endif %}
+    <script src="{% static 'js/portfolio/index.js' %}"></script>
+    
+    <p class="description">
+        ↑このポートフォリオページは、Djangoを使って作成しました。<br>
+        CI/CD をGitHub Actions で実装し、<br>
+        Azure App Service にデプロイしています。<br>
+        データベースや静的ファイルはAzureのサービスを使っています。<br>
+        Azureってよいと思いませんか?<br>
+        <a href="https://azure.microsoft.com/ja-jp/" target="_blank">Azure</a>
+    </p>
+
+    <p class="description">
+        下のゲームは、キーボードの上下矢印キーを使って操作できます。<br>
+        ぜひ遊んでみてください！<br>
+    </p>
+    <canvas id="my-canvas" width="520" height="300"></canvas>
+    <script src="{% static 'js/portfolio/about.js' %}"></script>
+
+    <p class="description">
+        ぜひsoundcloudも覗きに来てみて下さい。<br>
+        変なhousetechnoを生産しています。<br>
+        <iframe class="soundcloud" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2051013088&color=%23a4a4a4&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/user-517857710" title="nosssy" target="_blank" style="color: #cccccc; text-decoration: none;">nosssy</a> · <a href="https://soundcloud.com/user-517857710/simplifiedwip" title="simplified(wip)" target="_blank" style="color: #cccccc; text-decoration: none;">simplified(wip)</a></div>
+    </p>
+
+    <p style="color: red;">
+        注: このページには魚が泳いでいます。気をつけてください。
+    </p>
+
+    <a href="/portfolio">Back to list</a>
+{% endblock %}

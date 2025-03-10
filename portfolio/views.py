@@ -77,3 +77,8 @@ class DeletePortfolioView(LoginRequiredMixin, UserPassesTestMixin, View):
         portfolio.delete()
 
         return redirect('index')
+    
+def about(request):
+    # ランダムなポートフォリオを1つ取得
+    portfolio = PortFolio.objects.order_by('?').first()
+    return render(request, 'portfolio/about.html', {'portfolio': portfolio})
