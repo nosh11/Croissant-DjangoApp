@@ -1,3 +1,16 @@
 {
-    "materialkv.pythonFile": "main.py"
+    "materialkv.pythonFile": "main.py",
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/desktop.ini": true,
+        "**/__pycache__": true,
+        "**/.venv": true,
+        "**/staticfiles": true,
+        "**/media": true,
+    }
 }
