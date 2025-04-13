@@ -67,43 +67,6 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FF816EC3E1F3473AAA70E1A7E68C3C96 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F29F15ED203040DFA001B0B79AD1B660 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_47FBE73477C64190934CC74CB3D9DDC6 }}
-
-      - name: Azure App Service の環境変数設定
-        uses: azure/appservice-settings@v1
-        with:
-          app-name: 'croissantmc'
-          slot-name: 'Production'
-          app-settings-json: |
-            [
-              {
-                "name": "DJANGO_ENV",
-                "value": "production"
-              },
-              {
-                "name": "PGHOST",
-                "value": "${{ secrets.PGHOST }}"
-              },
-              {
-                "name": "PGUSER",
-                "value": "${{ secrets.PGUSER }}"
-              },
-              {
-                "name": "PGPORT",
-                "value": "${{ secrets.PGPORT }}"
-              },
-              {
-                "name": "PGDATABASE",
-                "value": "${{ secrets.PGDATABASE }}"
-              },
-              {
-                "name": "PGPASSWORD",
-                "value": "${{ secrets.PGPASSWORD }}"
-              },
-              {
-                "name": "SCM_DO_BUILD_DURING_DEPLOYMENT",
-                "value": "true"
-              }
-            ]
       
       - name: 'Deploy to Azure Web App using ZipDeploy'
         uses: azure/webapps-deploy@v3
