@@ -3,6 +3,7 @@ from django.views import View
 
 from novel.forms import NovelForm
 from novel.models import Novel
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 
@@ -14,7 +15,9 @@ class NovelListView(View):
 index = NovelListView.as_view()
 
 # 
-class NovelCreateView(View):
+class NovelCreateView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.has_perm('novel.add_novel')
     def get(self, request, pk = None):
         if (pk):
             novel = Novel.objects.get(pk=pk)
@@ -69,7 +72,9 @@ class NovelInfoView(View):
 info = NovelInfoView.as_view()
 
 
-class NovelDeleteView(View):
+class NovelDeleteView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.has_perm('novel.delete_novel')
     def get(self, request, pk):
         if (Novel.objects.filter(pk=pk).exists() == False):
             return render(request, '404.html')

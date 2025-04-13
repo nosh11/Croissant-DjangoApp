@@ -1,0 +1,28 @@
+services:
+  web:
+    build: .
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_EMAIL: admin@example.com
+      DJANGO_SUPERUSER_PASSWORD: password
+
+  db:
+    image: bitnami/mysql:latest
+    environment:
+      - name=value
+      # You need to specify one of the following as an environment variable:
+      # - MYSQL_ROOT_PASSWORD
+      # - MYSQL_ALLOW_EMPTY_PASSWORD
+      # - MYSQL_RANDOM_ROOT_PASSWORD
+      - MYSQL_ROOT_PASSWORD=example
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

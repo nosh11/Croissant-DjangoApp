@@ -4,8 +4,8 @@ from novel import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("create/", views.create, name="create"),
-    path("info/<int:pk>/", views.info, name="info"),
-    path("edit/<int:pk>/", views.create, name="edit"),
-    path("delete/<int:pk>/", views.delete, name="delete"),
+    path("create/", views.NovelCreateView.as_view(), name="create"),
+    path("info/<int:pk>/", views.NovelInfoView.as_view(), name="info"),
+    path("edit/<int:pk>/", views.NovelCreateView.as_view(), name="edit"),
+    path("delete/<int:pk>/", views.NovelDeleteView.as_view(), name="delete"),
 ]

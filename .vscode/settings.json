@@ -12,5 +12,7 @@
         "**/.venv": true,
         "**/staticfiles": true,
         "**/media": true,
-    }
+    },
+
+    "python.autoComplete.extraPaths": ["./.venv/Lib/site-packages"]
 }

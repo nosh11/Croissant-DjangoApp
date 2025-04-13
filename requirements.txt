@@ -55,7 +55,7 @@ cryptography==44.0.2
     #   azure-storage-blob
     #   msal
     #   pyjwt
-django==5.1.6
+django==5.1.7
     # via
     #   -r requirements.in
     #   django-allow-cidr
